@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 /// FirebaseAuth, Google Auth
 abstract class IAuthFacade {
+  /// Unit is void class type.
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
     @required EmailAddress emailAddress,
     @required PasswordValue passwordValue,
