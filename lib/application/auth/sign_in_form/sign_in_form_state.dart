@@ -7,6 +7,7 @@ abstract class SignInFormState with _$SignInFormState {
     @required PasswordValue passwordValue,
     @required bool showErrorMessages,
     @required bool isSubmitting,
+    /// Option = Has result or not (not error)
     @required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
   }) = _SignInFormState;
 
