@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'failures.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String value) {
-  const EMAIL_REGEX =
+  const emailRegex =
       r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
 
-  if (RegExp(EMAIL_REGEX).hasMatch(value)) {
+  if (RegExp(emailRegex).hasMatch(value)) {
     return right(value);
   }
 
