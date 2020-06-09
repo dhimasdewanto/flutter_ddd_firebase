@@ -16,10 +16,10 @@ class SignInForm extends StatelessWidget {
             (failure) {
               FlushbarHelper.createError(
                 message: failure.map(
-                  cancelledByUser: (_) => "",
-                  serverError: (_) => "",
-                  emailAlreadyInUse: (_) => "",
-                  invalidEmailAndPassword: (_) => "",
+                  cancelledByUser: (_) => "Cancelled",
+                  serverError: (_) => "Server error",
+                  emailAlreadyInUse: (_) => "Email already in use",
+                  invalidEmailAndPassword: (_) => "Invalid email or password",
                 ),
               ).show(context);
             },
@@ -126,11 +126,25 @@ class SignInForm extends StatelessWidget {
                   child: const Text("SIGN IN WITH GOOGLE"),
                 ),
               ),
+              if (state.isSubmitting) _loadingIndicator(),
               const SizedBox(height: 8.0),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget _loadingIndicator() {
+    return Column(
+      children: <Widget>[
+        const SizedBox(height: 8.0),
+        Container(
+          width: 40.0,
+          height: 40.0,
+          child: const CircularProgressIndicator(),
+        ),
+      ],
     );
   }
 }
