@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dhimasdewanto.firebase_ddd_course">
+    package="com.dhimasdewanto.flutter_ddd_firebase">
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->

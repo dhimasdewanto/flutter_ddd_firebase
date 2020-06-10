@@ -1,4 +1,4 @@
-package com.dhimasdewanto.firebase_ddd_course
+package com.dhimasdewanto.flutter_ddd_firebase
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
