@@ -30,105 +30,98 @@ class SignInForm extends StatelessWidget {
       builder: (context, state) {
         return Form(
           autovalidate: state.showErrorMessages,
-          child: ListView(
-            children: <Widget>[
-              const SizedBox(height: 8.0),
-              Text(
-                "📝",
-                style: Theme.of(context).textTheme.headline1,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8.0),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.mail),
-                  labelText: "Email",
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const SizedBox(height: 8.0),
+                Text(
+                  "Auth",
+                  style: Theme.of(context).textTheme.headline1,
+                  textAlign: TextAlign.center,
                 ),
-                onChanged: (value) => context
-                    .bloc<SignInFormBloc>()
-                    .add(SignInFormEvent.emailChanged(value)),
+                const SizedBox(height: 8.0),
+                TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.mail),
+                    labelText: "Email",
+                  ),
+                  onChanged: (value) => context
+                      .bloc<SignInFormBloc>()
+                      .add(SignInFormEvent.emailChanged(value)),
 
-                /// Use context.bloc<SignInFormBloc>().state.emailAddress
-                /// Instead of state.emailAddress
-                /// Because if we typed 'ABC', validator only work 'AB'
-                /// So state only can read before it build.
-                validator: (_) => context
-                    .bloc<SignInFormBloc>()
-                    .state
-                    .emailAddress
-                    .value
-                    .fold(
-                      (failure) => failure.maybeMap(
-                        invalidEmail: (_) => "Invalid Email",
-                        orElse: () => null,
+                  /// Use context.bloc<SignInFormBloc>().state.emailAddress
+                  /// Instead of state.emailAddress
+                  /// Because if we typed 'ABC', validator only work 'AB'
+                  /// So state only can read before it build.
+                  validator: (_) => context
+                      .bloc<SignInFormBloc>()
+                      .state
+                      .emailAddress
+                      .value
+                      .fold(
+                        (failure) => failure.maybeMap(
+                          invalidEmail: (_) => "Invalid Email",
+                          orElse: () => null,
+                        ),
+                        (_) => null,
                       ),
-                      (_) => null,
-                    ),
-              ),
-              const SizedBox(height: 8.0),
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  labelText: "Password",
                 ),
-                onChanged: (value) => context
-                    .bloc<SignInFormBloc>()
-                    .add(SignInFormEvent.passwordChanged(value)),
+                const SizedBox(height: 8.0),
+                TextFormField(
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
+                    labelText: "Password",
+                  ),
+                  onChanged: (value) => context
+                      .bloc<SignInFormBloc>()
+                      .add(SignInFormEvent.passwordChanged(value)),
 
-                /// Use context.bloc<SignInFormBloc>().state.passwordValue
-                /// Instead of state.passwordValue
-                /// Because if we typed 'ABC', validator only work 'AB'
-                /// So state only can read before it build.
-                validator: (_) => context
-                    .bloc<SignInFormBloc>()
-                    .state
-                    .passwordValue
-                    .value
-                    .fold(
-                      (failure) => failure.maybeMap(
-                        invalidEmail: (_) => "Short Password",
-                        orElse: () => null,
+                  /// Use context.bloc<SignInFormBloc>().state.passwordValue
+                  /// Instead of state.passwordValue
+                  /// Because if we typed 'ABC', validator only work 'AB'
+                  /// So state only can read before it build.
+                  validator: (_) => context
+                      .bloc<SignInFormBloc>()
+                      .state
+                      .passwordValue
+                      .value
+                      .fold(
+                        (failure) => failure.maybeMap(
+                          invalidEmail: (_) => "Short Password",
+                          orElse: () => null,
+                        ),
+                        (_) => null,
                       ),
-                      (_) => null,
-                    ),
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: FlatButton(
-                      onPressed: () => context.bloc<SignInFormBloc>().add(
-                          const SignInFormEvent
-                              .signInWithEmailAndPasswordPressed()),
-                      child: const Text("SIGN IN"),
-                    ),
-                  ),
-                  Expanded(
-                    child: FlatButton(
-                      onPressed: () => context.bloc<SignInFormBloc>().add(
-                          const SignInFormEvent
-                              .registerWithEmailAndPasswordPressed()),
-                      child: const Text("REGISTER"),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Container(
-                width: double.infinity,
-                child: RaisedButton(
+                ),
+                const SizedBox(height: 8.0),
+                FlatButton(
+                  onPressed: () => context.bloc<SignInFormBloc>().add(
+                      const SignInFormEvent
+                          .signInWithEmailAndPasswordPressed()),
+                  child: const Text("SIGN IN"),
+                ),
+                const SizedBox(height: 8.0),
+                FlatButton(
+                  onPressed: () => context.bloc<SignInFormBloc>().add(
+                      const SignInFormEvent
+                          .registerWithEmailAndPasswordPressed()),
+                  child: const Text("REGISTER"),
+                ),
+                const SizedBox(height: 8.0),
+                FlatButton(
                   onPressed: () => context
                       .bloc<SignInFormBloc>()
                       .add(const SignInFormEvent.signInWithGoogle()),
-                  color: Colors.lightBlue,
                   child: const Text("SIGN IN WITH GOOGLE"),
                 ),
-              ),
-              if (state.isSubmitting) _loadingIndicator(),
-              const SizedBox(height: 8.0),
-            ],
+                if (state.isSubmitting) _loadingIndicator(),
+                const SizedBox(height: 8.0),
+              ],
+            ),
           ),
         );
       },
