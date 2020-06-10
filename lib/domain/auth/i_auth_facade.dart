@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_ddd_course/domain/auth/auth_failure.dart';
-import 'package:firebase_ddd_course/domain/auth/user.dart';
-import 'package:firebase_ddd_course/domain/auth/value_objects.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_ddd_firebase/domain/auth/user.dart';
+
+import 'auth_failure.dart';
+import 'value_objects.dart';
 
 /// FirebaseAuth, Google Auth
 abstract class IAuthFacade {

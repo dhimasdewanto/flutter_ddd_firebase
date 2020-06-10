@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_ddd_course/domain/core/failures.dart';
-import 'package:firebase_ddd_course/domain/core/value_objects.dart';
-import 'package:firebase_ddd_course/domain/core/value_transformers.dart';
-import 'package:firebase_ddd_course/domain/core/value_validators.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ddd_firebase/domain/core/failures.dart';
+import 'package:flutter_ddd_firebase/domain/core/value_objects.dart';
+import 'package:flutter_ddd_firebase/domain/core/value_transformers.dart';
+import 'package:flutter_ddd_firebase/domain/core/value_validators.dart';
 import 'package:kt_dart/kt.dart';
 
 class NoteBody extends ValueObject<String> {

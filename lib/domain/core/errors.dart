@@ -1,4 +1,4 @@
-import 'package:firebase_ddd_course/domain/core/failures.dart';
+import 'package:flutter_ddd_firebase/domain/core/failures.dart';
 
 class UnexpectedValueError extends Error {
   UnexpectedValueError(this.valueFailure);

@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_ddd_course/domain/auth/auth_failure.dart';
-import 'package:firebase_ddd_course/domain/auth/i_auth_facade.dart';
-import 'package:firebase_ddd_course/domain/auth/value_objects.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_ddd_firebase/domain/auth/auth_failure.dart';
+import 'package:flutter_ddd_firebase/domain/auth/i_auth_facade.dart';
+import 'package:flutter_ddd_firebase/domain/auth/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

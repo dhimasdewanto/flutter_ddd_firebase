@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_ddd_course/application/auth/auth_bloc.dart';
-import 'package:firebase_ddd_course/injection.dart';
-import 'package:firebase_ddd_course/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ddd_firebase/application/auth/auth_bloc.dart';
+import 'package:flutter_ddd_firebase/presentation/routes/router.gr.dart';
+
+import '../../injection.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key key}) : super(key: key);
