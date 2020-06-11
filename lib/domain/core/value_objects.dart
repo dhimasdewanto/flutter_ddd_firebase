@@ -26,6 +26,13 @@ abstract class ValueObject<T> extends Equatable {
       id,
     );
   }
+
+  Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
+    return value.fold(
+      (failure) => left(failure),
+      (_) => right(unit),
+    );
+  }
 }
 
 class UniqueId extends ValueObject<String> {
