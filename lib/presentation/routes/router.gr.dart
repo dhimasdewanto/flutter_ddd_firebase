@@ -9,13 +9,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_ddd_firebase/presentation/splash/splash_page.dart';
 import 'package:flutter_ddd_firebase/presentation/sign_in/sign_in_page.dart';
+import 'package:flutter_ddd_firebase/presentation/notes/notes_overview/notes_overview_page.dart';
 
 class Routes {
   static const String splashPage = '/';
   static const String signInPage = '/sign-in-page';
+  static const String notesOverviewPage = '/notes-overview-page';
   static const all = <String>{
     splashPage,
     signInPage,
+    notesOverviewPage,
   };
 }
 
@@ -25,6 +28,7 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.splashPage, page: SplashPage),
     RouteDef(Routes.signInPage, page: SignInPage),
+    RouteDef(Routes.notesOverviewPage, page: NotesOverviewPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -42,6 +46,14 @@ class Router extends RouterBase {
           orElse: () => SignInPageArguments());
       return MaterialPageRoute<dynamic>(
         builder: (context) => SignInPage(key: args.key),
+        settings: data,
+      );
+    },
+    NotesOverviewPage: (RouteData data) {
+      var args = data.getArgs<NotesOverviewPageArguments>(
+          orElse: () => NotesOverviewPageArguments());
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => NotesOverviewPage(key: args.key),
         settings: data,
       );
     },
@@ -68,6 +80,14 @@ extension RouterNavigationHelperMethods on ExtendedNavigatorState {
         Routes.signInPage,
         arguments: SignInPageArguments(key: key),
       );
+
+  Future<dynamic> pushNotesOverviewPage({
+    Key key,
+  }) =>
+      pushNamed<dynamic>(
+        Routes.notesOverviewPage,
+        arguments: NotesOverviewPageArguments(key: key),
+      );
 }
 
 // *************************************************************************
@@ -84,4 +104,10 @@ class SplashPageArguments {
 class SignInPageArguments {
   final Key key;
   SignInPageArguments({this.key});
+}
+
+//NotesOverviewPage arguments holder class
+class NotesOverviewPageArguments {
+  final Key key;
+  NotesOverviewPageArguments({this.key});
 }

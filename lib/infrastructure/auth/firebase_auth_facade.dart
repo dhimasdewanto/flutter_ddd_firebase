@@ -2,12 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_ddd_firebase/domain/auth/auth_failure.dart';
-import 'package:flutter_ddd_firebase/domain/auth/i_auth_facade.dart';
-import 'package:flutter_ddd_firebase/domain/auth/user.dart';
-import 'package:flutter_ddd_firebase/domain/auth/value_objects.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/auth/auth_failure.dart';
+import '../../domain/auth/i_auth_facade.dart';
+import '../../domain/auth/user.dart';
+import '../../domain/auth/value_objects.dart';
 import 'firebase_user_mapper.dart';
 
 @LazySingleton(as: IAuthFacade)
@@ -25,7 +26,6 @@ class FirebaseAuthFacade implements IAuthFacade {
     final currentUser = await firebaseAuth.currentUser();
     return optionOf(currentUser?.toDomain());
   }
-  
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
@@ -79,24 +79,26 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> signInWithGoogle() async {
-    final googleUser = await googleSignIn.signIn();
+    try {
+      final googleUser = await googleSignIn.signIn();
 
-    if (googleUser == null) {
-      return left(const AuthFailure.cancelledByUser());
-    }
+      if (googleUser == null) {
+        return left(const AuthFailure.cancelledByUser());
+      }
 
-    final googleAuth = await googleUser.authentication;
+      final googleAuth = await googleUser.authentication;
 
-    final authCredential = GoogleAuthProvider.getCredential(
-      idToken: googleAuth.idToken,
-      accessToken: googleAuth.accessToken,
-    );
+      final authCredential = GoogleAuthProvider.getCredential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      );
 
-    return firebaseAuth.signInWithCredential(authCredential).then((result) {
-      return right(unit);
-    }).catchError((error) {
+      return firebaseAuth
+          .signInWithCredential(authCredential)
+          .then((result) => right(unit));
+    } on PlatformException {
       return left(const AuthFailure.serverError());
-    }) as Future<Either<AuthFailure, Unit>>;
+    }
   }
 
   @override
