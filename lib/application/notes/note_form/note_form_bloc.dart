@@ -20,12 +20,13 @@ part 'note_form_bloc.freezed.dart';
 
 @injectable
 class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
-  NoteFormBloc({@required this.noteRepository});
+  NoteFormBloc({
+    @required this.noteRepository,
+  }) : super(
+          NoteFormState.initial(),
+        );
 
   final INoteRepository noteRepository;
-
-  @override
-  NoteFormState get initialState => NoteFormState.initial();
 
   @override
   Stream<NoteFormState> mapEventToState(
